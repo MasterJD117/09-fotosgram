@@ -17,5 +17,6 @@ export class PostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+// ggga
 
 }
