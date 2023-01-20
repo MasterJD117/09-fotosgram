@@ -20,13 +20,21 @@
 
 
   <!-- Refresher -->
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <!-- Post -->
   <app-posts [posts]="post"></app-posts>
 
   <!-- Infinite Scroll -->
-
+  <ion-infinite-scroll threshold="25%" 
+                       [disabled]="!habillitado"
+                       position="bottom" 
+                       (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 
 </ion-content>

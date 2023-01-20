@@ -11,14 +11,19 @@ const URL = environment.url;
 })
 export class PostsService {
 
-  pagina = 0;
+  paginaPosts = 0;
 
   constructor( private http: HttpClient ) { }
 
 
-  getPosts(){
-    this.pagina ++;
-    return this.http.get<RespuestaPosts>(`${ URL }/posts/?pagina=${ this.pagina }`);
+  getPosts( pull: boolean = false ){
+
+    if (pull) {
+      this.paginaPosts = 0;
+    }
+
+    this.paginaPosts ++;
+    return this.http.get<RespuestaPosts>(`${ URL }/posts/?pagina=${ this.paginaPosts }`);
   }
   
 }
