@@ -9,7 +9,7 @@ import { Post } from '../../interfaces/interfaces';
 })
 export class Tab1Page implements OnInit {
 
-  post: Post[] = [];
+  posts: Post[] = [];
 
   habillitado = true;
 
@@ -17,19 +17,24 @@ export class Tab1Page implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+
+    this.postService.nuevoPost.subscribe( post => {
+      this.posts.unshift( post );
+    });
+    
   }
 
   doRefresh(event: Event) {
     this.loadData( event, true );
     this.habillitado = true;
-    this.post = [];
+    this.posts = [];
   }
 
   loadData(event?: any, pull: boolean = false) {
 
     this.postService.getPosts( pull ).subscribe((resp) => {
       console.log(resp);
-      this.post.push(...resp.posts);
+      this.posts.push(...resp.posts);
 
       if (event) {
         event.target.complete();
